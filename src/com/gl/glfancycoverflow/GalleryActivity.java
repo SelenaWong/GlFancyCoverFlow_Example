@@ -30,6 +30,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewTreeObserver;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -42,6 +43,7 @@ import java.util.List;
 import com.app.glfancycoverflow.R;
 import com.app.model.Product;
 import com.app.recyclerview.CustomAdapter;
+import com.app.recyclerview.SpaceItemDecoration;
 import com.app.recyclerview.listener.*;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -78,6 +80,7 @@ public class GalleryActivity extends Activity implements OnClickListener{
        mRecyclerView = (RecyclerView)findViewById(R.id.rlv_cart_product);
        mLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
        mRecyclerView.setLayoutManager(mLayoutManager);
+       mRecyclerView.addItemDecoration( new SpaceItemDecoration(5));
        mAddBtn.setOnClickListener(this);
        mPurchaseBtn.setOnClickListener(this);
        mCartDeleteBtn.setOnClickListener(this);
@@ -92,21 +95,7 @@ public class GalleryActivity extends Activity implements OnClickListener{
     		mAdapter.notifyDataSetChanged();
     	}else{
     		mProducts = ProductTest.getProducts();
-            mAdapter= new CustomFancyCoverFlowAdpater(mProducts,GalleryActivity.this,new OnGalleryItemClickListener(){
-
-				@Override
-				public void OnItemClickListener(ImageView view, int position) {
-					// TODO Auto-generated method stub
-					 Log.i("TAG", " item click pos="+position);
-					 if(mAddList.size()==UPPERLIMIT){
-						 return;
-					 }
-					 mListAdapter.refreshDeleteBtn(false);
-					 mAddList.add(mProducts.get(position));
-					 addToCart(view,position);
-				}
-            	
-            });
+            mAdapter= new CustomFancyCoverFlowAdpater(mProducts,GalleryActivity.this);
     	}
 	    ViewTreeObserver vto2 = fancyCoverFlow.getViewTreeObserver();
 	         vto2.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -130,15 +119,22 @@ public class GalleryActivity extends Activity implements OnClickListener{
 	                  }
 	              }
 	          });
-	        /* fancyCoverFlow.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+	         fancyCoverFlow.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
 				@Override
 				public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 					// TODO Auto-generated method stub
-				
-					 //setViewPagerAndZoom( fancyCoverFlow.getSelectedView(),fancyCoverFlow.getSelectedItemPosition());
+					 if(mAddList.size()==UPPERLIMIT){
+						 return;
+					 }
+					 int position =arg2%mProducts.size();
+					 Log.i("TAG", " item click pos="+position);
+				     ImageView v = (ImageView) arg1.findViewById(R.id.coverflow_image);
+					 mListAdapter.refreshDeleteBtn(false);
+					 mAddList.add(mProducts.get(position));
+				     addToCart(v,position);
 				 }
-	         });*/
+	         });
     }
     
     public void addToCart( ImageView imv,int position ){

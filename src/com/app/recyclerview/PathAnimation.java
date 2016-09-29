@@ -9,7 +9,7 @@
  */
 
 
-package at.technikum.mti.fancycoverflow;
+package com.app.recyclerview;
 
 import android.graphics.Path;
 import android.graphics.PathMeasure;

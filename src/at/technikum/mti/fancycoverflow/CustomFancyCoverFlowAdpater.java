@@ -15,7 +15,6 @@ import java.util.List;
 
 import com.app.glfancycoverflow.R;
 import com.app.model.Product;
-import com.app.recyclerview.listener.OnGalleryItemClickListener;
 import com.gl.glfancycoverflow.UILApplication;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -41,7 +40,6 @@ public class CustomFancyCoverFlowAdpater extends FancyCircleCoverFlowAdapter{
 	
     private final static int ImageLayoutWidth =160;//280
 	private final static int ImageLayoutHeight =280;//500
-	private OnGalleryItemClickListener mListener;
 	
     // =============================================================================
     // Private members
@@ -50,11 +48,10 @@ public class CustomFancyCoverFlowAdpater extends FancyCircleCoverFlowAdapter{
 	private ImageLoader imageLoader;
 	private Context context;
 	private LayoutInflater inflater;
-	public CustomFancyCoverFlowAdpater( List<Product> proList,Context context,OnGalleryItemClickListener listener) {
+	public CustomFancyCoverFlowAdpater( List<Product> proList,Context context) {
 		super( proList);
 		list = proList;
 		this.context = context;
-		this.mListener = listener;
 		imageLoader = ImageLoader.getInstance();
 		inflater = LayoutInflater.from(context);
 		// TODO Auto-generated constructor stub
@@ -76,29 +73,15 @@ public class CustomFancyCoverFlowAdpater extends FancyCircleCoverFlowAdapter{
 		imageLoader.displayImage( list.get(i%list.size())
 				.getProUrl(), customViewGroup.getImageView(),UILApplication.getDisplayImageOptions());
         customViewGroup.getTextView().setText(String.format("Item %d", i));
-        final ImageView imv = customViewGroup.getImageView();
-        final LinearLayout ll = customViewGroup.getLinearLayout();
-        final int position = i;
-        ll.setOnClickListener(new OnClickListener(){
-    			@Override
-    			public void onClick(View arg0) {
-    				// TODO Auto-generated method stub
-    				mListener.OnItemClickListener(imv, position);
-    			}
-           });
         return customViewGroup;
      }
     
-    
-   
-
 
 	private static class CustomViewGroup extends LinearLayout {
 
 	        // =============================================================================
 	        // Child views
 	        // =============================================================================
-			private LinearLayout linearLayout;
 	        private TextView textView;
 
 	        private ImageView imageView;
@@ -116,7 +99,6 @@ public class CustomFancyCoverFlowAdpater extends FancyCircleCoverFlowAdapter{
 	            this.setOrientation(VERTICAL);
 	            inflater = LayoutInflater.from(context);
 	            View view =inflater.inflate(R.layout.item_gallery, null,false);
-	            linearLayout = (LinearLayout) view.findViewById(R.id.coverflow_ll);
 	            textView = (TextView) view.findViewById(R.id.coverflow_tv);
 	            imageView = (ImageView) view.findViewById(R.id.coverflow_image);
 	            button = (Button) view.findViewById(R.id.coverflow_btn);   
@@ -127,9 +109,6 @@ public class CustomFancyCoverFlowAdpater extends FancyCircleCoverFlowAdapter{
 	        // =============================================================================
 	        // Getters
 	        // =============================================================================
-	        private LinearLayout getLinearLayout(){
-	        	return linearLayout;
-	        }
 
 	        private TextView getTextView() {
 	            return textView;

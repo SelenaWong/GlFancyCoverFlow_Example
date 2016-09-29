@@ -373,8 +373,4 @@ public class FancyCoverFlow extends Gallery {
 			wrapper=null;
 		}
 	}
-	
-	
-    
-
 }

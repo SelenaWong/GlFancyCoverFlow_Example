@@ -73,8 +73,8 @@ containing a value of this type.
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
     
          */
-        public static final int activity_horizontal_margin=0x7f050001;
-        public static final int list_item_height=0x7f050000;
+        public static final int activity_horizontal_margin=0x7f040001;
+        public static final int list_item_height=0x7f040000;
     }
     public static final class drawable {
         public static final int btn_bg=0x7f020000;
@@ -121,13 +121,12 @@ containing a value of this type.
         public static final int main=0x7f070000;
     }
     public static final class string {
-        public static final int app_name=0x7f040000;
-        public static final int element_text=0x7f040004;
-        public static final int grid_layout_manager=0x7f040005;
-        public static final int intro_message=0x7f040001;
-        public static final int linear_layout_manager=0x7f040006;
-        public static final int sample_hide_log=0x7f040003;
-        public static final int sample_show_log=0x7f040002;
+        public static final int app_name=0x7f050002;
+        public static final int element_text=0x7f050003;
+        public static final int grid_layout_manager=0x7f050004;
+        public static final int linear_layout_manager=0x7f050005;
+        public static final int sample_hide_log=0x7f050001;
+        public static final int sample_show_log=0x7f050000;
     }
     public static final class style {
         /** 

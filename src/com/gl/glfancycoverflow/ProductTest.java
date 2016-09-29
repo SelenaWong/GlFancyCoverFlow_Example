@@ -26,14 +26,13 @@ public class ProductTest {
 	};
 
 	public static String[] names = new String[] { "哈利波特", "饥饿鸟", "暮光",
-			"剑雨", "3D食人虫", "心花怒放", "忍者神龟"
+			"剑雨", "3D食人虫", "心花怒放", "忍者神龟","移动迷宫"	};
 
-	};
-
+	
 	public static List<Product> getProducts() {
 		List<Product> proList = new ArrayList<Product>();
 
-		for (int i = 0; i < 7; i++) {
+		for (int i = 0; i < 8; i++) {
 			Product film = new Product(names[i], urls[i]);
 			proList.add(film);
 		}
